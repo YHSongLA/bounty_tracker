@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Edit bounty</title>
+</head>
+<body class="bg-dark">
+    <header class="overlay txt background p-4 border-bottom border-success">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="text-light">
+                <img src="{{url_for('static',filename='images/jade_rab.jpg')}}" alt="jade rabbit" class="jade">
+            </div>
+            <div class="bttn">
+                <a class="btn btn-outline-danger mx-2" href="/logout">Logout</a>
+                <a class="btn btn-outline-info" href="/bounties">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <video playsinline autoplay muted loop id="myVideo">
+        <source src="{{url_for('static',filename='images/pressmaster.mp4')}}" type="video/mp4">
+    </video>
+
+    <div class="overlay txt background container m-auto mt-5 border border-success rounded w-50 py-3">
+        <form action="/bounty/update" method="post" class="col-6 mx-auto mt-5">
+            <h2 class="text-center text-success">Edit Bounty</h2>
+            <input type="hidden" name="id" value={{bounty.id}}>
+            <div class="form-group text-success mb-3">
+                <label for="title">Title:</label>
+                <input type="text" name="title" class="form-control bg-light text-dark" value="{{bounty.title}}">
+            </div>
+            <div class="form-group text-success mb-3">
+                <label for="description">Description:</label>
+                <input type="text" name="description" class="form-control bg-light text-dark" value="{{bounty.description}}">
+            </div>
+            <div class="form-group text-success mb-3 d-flex" name="status" value="{{bounty.status}}">
+                <label for="status">Status:</label>
+                <select name="status" class="form-select w-75 ms-2">
+                    <option value="0">Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Stuck">Stuck</option>
+                    <option value="Done">Done</option>
+                </select>
+            </div>
+            <div class="form-group stars" value="{{bounty.priority}}" name="priority">
+                <label for="priority" class="text-success me-2">Priority:</label>
+                <input type="hidden" name="priority" class="priority">
+                <span class="star" value="1"></span>
+                <span class="star" value="2"></span>
+                <span class="star" value="3"></span>
+                <span class="star" value="4"></span>
+                <span class="star" value="5"></span>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Update" class="btn btn-outline-success mt-3">
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='script.js')}}"></script>
+</body>
+</html>

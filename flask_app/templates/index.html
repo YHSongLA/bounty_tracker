@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Bounty Tracker</title>
+</head>
+<body class="bg-dark text-info">
+    <div class="showcase">
+        <header>
+            <h2 class="logo text-info">Bounty Tracker</h2>
+            <div>
+                <button type="button" class="login_open btn btn-outline-success mx-3" onclick="loginToggle()">Login</button>
+                <button type="button" class="regis_open btn btn-outline-success" onclick="regisToggle()">Register</button>
+            </div>
+        </header>
+
+        <video playsinline autoplay muted loop id="myVideo">
+            <source src="{{url_for('static',filename='images/pressmaster.mp4')}}" type="video/mp4">
+        </video>
+
+        <div class="overlay container">
+            <div class="loginRegis ">
+                <form action="/login" method="post" class="loginHide text-center w-25 m-auto background p-3 border border-info rounded" id="loginHide">
+                    <head class="login_head">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5>Login</h5>
+                            <div class="xClose" id="xClose" onclick="loginToggle()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </head>
+
+                    <div class="form-group">
+                        <label class="text-light">Email</label>
+                        <input type="text" class="form-control bg-secondary text-light" placeholder="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Password</label>
+                        <input type="password" class="form-control bg-secondary text-light" placeholder="Password" value="password"
+                            name="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Login</button>
+                </form>
+
+                <form action="/register/user" method="post" class="regisHide text-center w-25 m-auto background p-3 border border-info rounded" id="regisHide">
+                    <head class="login_head">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5>Registration</h5>
+                            <div class="xClose" id="xClose" onclick="regisToggle()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </head>
+
+                    <div class="form-group">
+                        <label class="text-light">First Name</label>
+                        <input type="text" class="form-control bg-secondary text-light" placeholder="first name" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Last Name</label>
+                        <input type="text" class="form-control bg-secondary text-light" placeholder="last name" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Email</label>
+                        <input type="text" class="form-control bg-secondary text-light" placeholder="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Password</label>
+                        <input type="password" class="form-control bg-secondary text-light" placeholder="Password" value="password"
+                            name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Confirm Password</label>
+                        <input type="password" class="form-control bg-secondary text-light" placeholder="Password" value="password"
+                            name="confirm-password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+</body>
+</html>

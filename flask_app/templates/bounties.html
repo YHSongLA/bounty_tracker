@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Bounties</title>
+</head>
+<body class="bg-dark text-info">
+    <header class="overlay text background p-4 border-bottom border-success">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="{{url_for('static',filename='images/jade_rab.jpg')}}" alt="jade rabbit" class="jade">
+            <div class="">
+                <form class="d-flex" role="search" action="/searched" method="POST">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched" id="searched">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="bttn">
+                <a class="btn btn-outline-danger mx-2" href="/logout">Logout</a>
+                <a class="btn btn-outline-info" href="/bounties">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <video playsinline autoplay muted loop id="myVideo">
+        <source src="{{url_for('static',filename='images/pressmaster.mp4')}}" type="video/mp4">
+    </video>
+
+    <div class="overlay text contents container m-auto background mt-5 border border-success rounded p-5">
+        <div class="row"></div>
+        <div class="float-end mt-3 mb-3">
+            <a href="/bounty/new" class="btn btn-outline-success">Add a Bounty!</a>
+        </div>
+
+        <h1 class="text-start text-success">Hunter <span class="text-light">{{session['first_name']}}</span></h1>
+
+        <h4 class="my-4 text-light">BOUNTIES</h4>
+
+        <table class="table table-dark table-hover border border-success text-success">
+            <thead>
+                <tr>
+                    <th><span class="text-success">Title</span></th>
+                    <th><span class="text-success">Owner</span></th>
+                    <th><span class="text-success"><a href="#" class="text-success">Status</a></span></th>
+                    <th><span class="text-success">Priority</span></th>
+                    <th><span class="text-success">Action</span></th>
+                </tr>
+            </thead>
+
+            <tbody class="text-light">
+                {% for bounty in bounties %}
+                <tr>
+                    <td><a href="/bounty/show/{{bounty.id}}" class="link-danger">{{bounty.title}}</a></td>
+                    <td>{{bounty.user}}</td>
+                    <td>{{bounty.status}}</td>
+                    <td>
+                        <div class="form-group stars" value="3" name="priority">
+                            {% for n in range(bounty.priority) %}
+                                <span class="star rated" value="1"></span>
+                            {% endfor %}
+                            {% for i in range(5 - bounty.priority) %}
+                                <span class="star" value="1"></span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td>
+                        {% if bounty.user_id == session['user_id'] %}
+                        <a href="/bounty/edit/{{bounty.id}}" class="text-success">Edit</a> |
+                        <a href="/bounty/destroy/{{bounty.id}}" class="text-success">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
